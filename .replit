@@ -1,30 +1,32 @@
-run = "zig build run"
+run = "cd accel && futhark pkg sync && futhark opencl --library futhark_kernels.fut && cd .. && zig build -Doptimize=ReleaseFast"
 entrypoint = "rsf.zig"
-hidden = [".build", "zig-cache", "zig-out"]
+hidden = ["zig-cache", "zig-out", ".zig-cache"]
 
 [agent]
 expertMode = true
 
 [nix]
-channel = "stable-24_05"
+channel = "stable-23_11"
+packages = ["zig_0_11", "futhark", "opencl-headers", "ocl-icd", "gcc", "gnumake", "pkg-config", "zls"]
 
-[deployment]
-run = ["sh", "-c", "zig build run"]
-deploymentTarget = "cloudrun"
+[env]
+FUTHARK_BACKEND = "opencl"
+ZIG_GLOBAL_CACHE_DIR = "/tmp/zig-cache"
+OCL_ICD_VENDORS = "/run/opengl-driver/etc/OpenCL/vendors"
 
-[languages]
 [languages.zig]
 pattern = "**/*.zig"
+syntax = "zig"
 
 [languages.zig.languageServer]
 start = "zls"
 
-[[ports]]
-localPort = 8080
-externalPort = 80
+[languages.futhark]
+pattern = "**/*.fut"
 
-[env]
-ZIG_GLOBAL_CACHE_DIR = "/tmp/zig-cache"
+[deployment]
+run = ["sh", "-c", "cd accel && futhark pkg sync && futhark opencl --library futhark_kernels.fut && cd .. && zig build -Doptimize=ReleaseFast && ./zig-out/bin/rsf"]
+deploymentTarget = "cloudrun"
 
 [unitTest]
 language = "zig"
