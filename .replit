@@ -6,8 +6,8 @@ hidden = ["zig-cache", "zig-out", ".zig-cache"]
 expertMode = true
 
 [nix]
-channel = "stable-23_11"
-packages = ["zig_0_11", "futhark", "opencl-headers", "ocl-icd", "gcc", "gnumake", "pkg-config", "zls"]
+channel = "stable-25_05"
+packages = ["zig_0_13", "futhark", "opencl-headers", "ocl-icd", "gcc", "gnumake", "pkg-config", "zls"]
 
 [env]
 FUTHARK_BACKEND = "opencl"
