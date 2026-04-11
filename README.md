@@ -7,7 +7,7 @@ Reversible Scatter Flow (RSF) Architektúra – Teljes dokumentáció (Magyar)
 
  Áttekintés
 
-A Reversible Scatter Flow (RSF) architektúra egy gyökérszintű neurális architektúra, amelyet invertálható csatolási primitívek köré terveztek, a hagyományos perceptronok, konvolúciók vagy figyelemmechanizmusok helyett. Az RSF modell minden rétege bijektív transzformáció, ami biztosítja, hogy a teljes hálózat matematikailag megfordítható legyen – a kimenetek lebegőpontos pontossággal visszaalakíthatók bemenetekre.
+A Reversible Scatter Flow (RSF) architektúra az ötödik gyökérszintű neurális architektúra, amelyet invertálható csatolási primitívek köré terveztek, a hagyományos perceptronok, konvolúciók vagy figyelemmechanizmusok helyett. Az RSF modell minden rétege bijektív transzformáció, ami biztosítja, hogy a teljes hálózat matematikailag megfordítható legyen – a kimenetek lebegőpontos pontossággal visszaalakíthatók bemenetekre.
 
 A rendszer egy nagy teljesítményű, formálisan verifikált stackre épül, amelynek alapja a Zig programozási nyelv a futásidő kezeléséhez, valamint a Futhark az adatpárhuzamos GPU gyorsításhoz.
 
