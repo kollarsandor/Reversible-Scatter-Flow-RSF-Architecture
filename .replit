@@ -1,0 +1,55 @@
+run = "zig build run"
+entrypoint = "rsf.zig"
+hidden = [".build", "zig-cache", "zig-out"]
+
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "zig build run"]
+deploymentTarget = "cloudrun"
+
+[languages]
+[languages.zig]
+pattern = "**/*.zig"
+
+[languages.zig.languageServer]
+start = "zls"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+[env]
+ZIG_GLOBAL_CACHE_DIR = "/tmp/zig-cache"
+
+[unitTest]
+language = "zig"
+
+[packager]
+language = "zig"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+enabledForHosting = false
+
+[debugger]
+support = true
+
+[debugger.interactive]
+transport = "stdio"
+startCommand = ["zig", "build", "test"]
+
+[debugger.interactive.initializeMessage]
+command = "initialize"
+type = "request"
+
+[debugger.interactive.launchMessage]
+command = "launch"
+type = "request"
+[debugger.interactive.launchMessage.arguments]
+stopAtEntry = false
